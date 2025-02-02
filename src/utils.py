@@ -1,0 +1,1 @@
+# Segédfüggvények és eszközök
