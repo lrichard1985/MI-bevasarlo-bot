@@ -1,6 +1,8 @@
 # src/security.py
 from google.cloud import secretmanager
 import os
+import json
+from oauth2client.service_account import ServiceAccountCredentials
 
 def get_secret(secret_name):
     """
@@ -11,12 +13,6 @@ def get_secret(secret_name):
     # Létrehoz egy Secret Manager klienst
     client = secretmanager.SecretManagerServiceClient()
 
-# Lekérni a VERIFY_TOKEN értékét:
-verify_token = get_secret('VERIFY_TOKEN')
-
-# Lekérni a PAGE_ACCESS_TOKEN értékét:
-page_access_token = get_secret('PAGE_ACCESS_TOKEN')
-  
     # A projekt azonosítóját a környezeti változóból veszi
     project_id = os.getenv('GOOGLE_CLOUD_PROJECT')
 
@@ -28,3 +24,12 @@ page_access_token = get_secret('PAGE_ACCESS_TOKEN')
     secret_value = response.payload.data.decode('UTF-8')
 
     return secret_value
+
+def get_service_account_credentials():
+    """
+    Dinamikusan betölti a Google Cloud Service Account JSON kulcsot a Secret Managerből.
+    :return: A service account hitelesítő adatai.
+    """
+    service_account_info = json.loads(get_secret('SERVICE_ACCOUNT_JSON'))
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info)
+    return credentials
