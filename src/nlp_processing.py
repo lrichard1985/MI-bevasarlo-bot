@@ -1,0 +1,1 @@
+# Természetes nyelvfeldolgozó funkciók
