@@ -3,7 +3,7 @@
 Flask==2.2.5
 
 # HTTP kérések kezelése
-requests==2.28.2
+requests==2.32.2
 
 # Google Cloud API-k használatához szükséges csomagok
 google-cloud-vision==3.1.0
