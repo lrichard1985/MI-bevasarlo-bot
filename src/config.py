@@ -1,0 +1,1 @@
+# Konfigurációs változók és beállítások
